@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
     <body>
-        <h1>Blog Name</h1>
+        <h1>Blog Name({{ $posts[0]->category->name }})</h1>
         <div class="create">
             <a href="{{ route('posts.create') }}">投稿作成</a>
         </div>
@@ -17,7 +17,6 @@
                     <h2 class='title'>
                         <a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a>
                     </h2>
-                    <a href="{{ route('categories.index', ['category' => $post->category_id]) }}">{{ $post->category->name }}</a>
                     <p class='body'>{{ $post->body }}</p>
                     <form action="{{ route('posts.delete', ['post' => $post->id]) }}" id="form_{{ $post->id }}" method="post">
                         @csrf
@@ -29,6 +28,9 @@
         </div>
         <div class='paginate'>
             {{ $posts->links() }}
+        </div>
+        <div class="footer">
+            <a href="/">戻る</a>
         </div>
     </body>
     <script>
