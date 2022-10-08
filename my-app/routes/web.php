@@ -27,6 +27,12 @@ Route::delete('/posts/{post}', [PostController::class,'delete'])->name('posts.de
 
 Route::get('/categories/{category}', [CategoryController::class,'index'])->name('categories.index');
 
+// コメント
+Route::get('/posts/{post}/get_comments', 'CommentController@get_comments')->name('get_comments');
+Route::resource('posts.comments', 'CommentController', [
+ 'only' => ['store', 'update', 'destroy'],
+]);
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
